@@ -1,0 +1,44 @@
+@import '@fontsource/source-sans-pro';
+/*
+  Reset
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+ul,
+ol,
+menu {
+  list-style: none;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: currentColor;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+/*
+  Utilities
+*/
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
