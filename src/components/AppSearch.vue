@@ -2,15 +2,14 @@
   <div class="search-area">
     <!-- input and button for search -->
     <div class="search-group">
-      <input class="search-input" type="text" v-model="searchedPokemon">
-      <button class="search-submit" @click="fetchPokemon">Cerca</button>
+      <input placeholder="Cerca il pokemon" class="search-input" type="text" v-model="searchedPokemon">
+      <button class="search-submit" @click="fetch">Cerca</button>
     </div>
     
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 
   export default {
     data() {
@@ -20,17 +19,8 @@ import axios from 'axios';
     },
 
     methods: {
-      fetchPokemon() {
-        console.log(this.searchedPokemon);
-
-        // Get the pokemon
-        axios
-          .get(`https://pokeapi.co/api/v2/pokemon/${this.searchedPokemon}`)
-          .then((res) => {
-            console.log(res.data)
-          })
-
-        // delete v-model value once the searching process is done
+      fetch() {
+        this.$emit('getPokemon', this.searchedPokemon);
         this.searchedPokemon = '';
       }
     }

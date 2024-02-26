@@ -1,9 +1,32 @@
 <script>
 import AppSearch from './AppSearch.vue';
+import axios from 'axios';
 
 export default {
   components: {
     AppSearch
+  },
+
+  data() {
+    return {
+      searchedPokemon: null
+    }
+  },
+
+  methods: {
+    fetchPokemon(searchedPokemon) {
+      console.log(searchedPokemon);
+
+      // Get the pokemon
+      axios
+        .get(`https://pokeapi.co/api/v2/pokemon/${searchedPokemon}`)
+        .then((res) => {
+          this.searchedPokemon = res.data;
+        })
+
+      // delete v-model value once the searching process is done
+      this.searchedPokemon = '';
+    }
   }
 }
 </script>
@@ -15,7 +38,7 @@ export default {
       <div class="pokedex">
         <!-- details and search section -->
         <div class="pokedex__search-details">
-          <AppSearch />
+          <AppSearch @getPokemon="fetchPokemon"/>
         </div>
         <!-- end of details and search section -->
 
