@@ -2,8 +2,14 @@
   <div class="search-area">
     <!-- input and button for search -->
     <div class="search-group">
-      <input placeholder="Cerca il pokemon" class="search-input" type="text" v-model="searchedPokemon">
-      <button class="search-submit" @click="fetch">Cerca</button>
+      <input 
+        placeholder="Search the pokemon" 
+        class="search-input" 
+        type="text" 
+        @keyup.enter="fetch"
+        v-model="searchedPokemon"
+      >
+      <button class="search-submit" @click="fetch">Search</button>
     </div>
     
   </div>
@@ -14,14 +20,14 @@
   export default {
     data() {
       return {
-        searchedPokemon: ''
+        searchedPokemon: null
       }
     },
 
     methods: {
       fetch() {
         this.$emit('getPokemon', this.searchedPokemon);
-        this.searchedPokemon = '';
+        this.searchedPokemon = null;
       }
     }
   }

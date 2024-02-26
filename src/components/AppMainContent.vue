@@ -1,10 +1,12 @@
 <script>
 import AppSearch from './AppSearch.vue';
+import AppPokemonDetails from './AppPokemonDetails.vue';
 import axios from 'axios';
 
 export default {
   components: {
-    AppSearch
+    AppSearch,
+    AppPokemonDetails
   },
 
   data() {
@@ -39,6 +41,7 @@ export default {
         <!-- details and search section -->
         <div class="pokedex__search-details">
           <AppSearch @getPokemon="fetchPokemon"/>
+          <AppPokemonDetails :pokemon="searchedPokemon"/>
         </div>
         <!-- end of details and search section -->
 
@@ -57,6 +60,7 @@ export default {
 @use '../styles/partials/vars' as *;
 .main-content {
   padding-top: 70px;
+  padding-bottom: 40px;
   padding-left: 15px;
   padding-right: 15px;
 
