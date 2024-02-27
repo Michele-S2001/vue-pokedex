@@ -96,6 +96,7 @@ export default {
           <AppSearch 
             @getPokemon="fetchPokemon" @catchPokemon="addToPokedex"
             @removePokemon="deleteToPokedex" 
+            :searchResult="pokemonSearchResult"
             :alreadyInMyPokedex="inPokedex"/>
           <AppPokemonDetails :pokemon="pokemonSearchResult"/>
         </div>

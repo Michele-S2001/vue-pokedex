@@ -12,8 +12,10 @@
       <button class="search-submit" @click="fetch">Search</button>
     </div>
     
-    <button v-if="!(alreadyInMyPokedex)" @click="catchIt" class="catch">Catch it !</button>
-    <button @click="removeIt" v-else class="remove">Rimuovi</button>
+    <div v-show="searchResult">
+      <button v-if="!(alreadyInMyPokedex)" @click="catchIt" class="catch">Catch it !</button>
+      <button @click="removeIt" v-else class="remove">Rimuovi</button>
+    </div>
   </div>
 </template>
 
@@ -27,7 +29,8 @@
     },
 
     props: {
-      alreadyInMyPokedex: Boolean
+      alreadyInMyPokedex: Boolean,
+      searchResult: Object
     },
 
     methods: {

@@ -19,7 +19,7 @@
     <ul class="pokemons" v-if="pokedex.length !== 0">
       <li 
       class="current-pokemon"
-      @click="getDetails(poke.name)" v-for="(poke, i) in pokedex" :key="i">
+      @click="getDetails(poke.name)" v-for="(poke, i) in pokedex" :key="poke.id">
         {{ poke.name }}
       </li>
     </ul>
