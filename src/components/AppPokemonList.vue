@@ -16,8 +16,10 @@
 <template>
   <div class="my-pokemons">
     <h3>My pokemons</h3>
-    <ul class="pokemon" v-if="pokedex.length !== 0">
-      <li @click="getDetails(poke.name)" v-for="(poke, i) in pokedex" :key="i">
+    <ul class="pokemons" v-if="pokedex.length !== 0">
+      <li 
+      class="current-pokemon"
+      @click="getDetails(poke.name)" v-for="(poke, i) in pokedex" :key="i">
         {{ poke.name }}
       </li>
     </ul>
@@ -35,9 +37,18 @@
   border-radius: 10px;
   max-width: 340px;
   margin: 0 auto;
+  max-height: 300px;
+  overflow: auto;
 
   h3 {
     margin-bottom: 24px;
+  }
+
+  .pokemons {
+    .current-pokemon {
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
   }
 }
 

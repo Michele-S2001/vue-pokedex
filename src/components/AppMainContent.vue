@@ -33,6 +33,7 @@ export default {
       }
       // delete v-model value once the searching process is done
       this.pokemonSearchResult = null;
+      this.inPokedex = false;
     },
 
     addToPokedex() {
@@ -75,8 +76,7 @@ export default {
     },
 
     getDetails(pokeName) {
-      this.pokemonSearchResult = pokeName;
-      this.fetchPokemon(this.pokemonSearchResult);
+      this.fetchPokemon(pokeName);
     }
   },
 
