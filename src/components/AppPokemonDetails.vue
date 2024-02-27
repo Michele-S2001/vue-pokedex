@@ -101,7 +101,6 @@
         &__inner {
           .stat {
             display: flex;
-            max-width: 300px;
 
             span {
               margin-left: auto;

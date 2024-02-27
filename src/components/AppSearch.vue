@@ -59,6 +59,7 @@
   padding: 0 14px;
   .search-group {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 5px;
     .search-input {

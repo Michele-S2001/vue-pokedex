@@ -149,6 +149,18 @@ export default {
   .main-content {
     .pokedex {
       grid-template-columns: 1fr;
+
+      &__search-details {
+        //end debug properties
+        padding: 15px 20px;
+        border-right: none;
+      }
+
+    
+      &__pokemons {
+        border-left: none;
+        padding: 20px;
+      }
     }
   }
 }
