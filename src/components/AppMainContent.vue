@@ -144,4 +144,12 @@ export default {
   }
 }
 
+@media (max-width: 980px) {
+  .main-content {
+    .pokedex {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
 </style>

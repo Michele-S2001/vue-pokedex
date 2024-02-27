@@ -51,12 +51,13 @@
 @use '../styles/partials/vars' as *;
 .search-area {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 14px;
   .search-group {
     display: flex;
     gap: 10px;
-
+    margin-bottom: 5px;
     .search-input {
       line-height: 32px;
       padding: 0 7px;
