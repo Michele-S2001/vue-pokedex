@@ -13,7 +13,7 @@
     </div>
     
     <button v-if="!(alreadyInMyPokedex)" @click="catchIt" class="catch">Catch it !</button>
-    <button v-else class="remove">Rimuovi</button>
+    <button @click="removeIt" v-else class="remove">Rimuovi</button>
   </div>
 </template>
 
@@ -38,6 +38,10 @@
 
       catchIt() {
         this.$emit('catchPokemon');
+      },
+
+      removeIt() {
+        this.$emit('removePokemon');
       }
     }
   }

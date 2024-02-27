@@ -13,36 +13,45 @@ export default {
 
   data() {
     return {
-      searchedPokemon: null,
+      pokemonSearchResult: null,
       myPokedex: [],
       inPokedex: false
     }
   },
 
   methods: {
-    fetchPokemon(searchedPokemon) {
-      // Get the pokemon
-      axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${searchedPokemon}`)
-        .then((res) => {
-          this.searchedPokemon = res.data;
-          this.alreadyInPokedex();
-        })
-
+    fetchPokemon(pokemonSearchResult) {
+      if(pokemonSearchResult) {
+        const toLowerCaseName = pokemonSearchResult.toLowerCase()
+        // Get the pokemon
+        axios
+          .get(`https://pokeapi.co/api/v2/pokemon/${toLowerCaseName}`)
+          .then((res) => {
+            this.pokemonSearchResult = res.data;
+            this.isInPokedex();
+          })
+      }
       // delete v-model value once the searching process is done
-      this.searchedPokemon = '';
+      this.pokemonSearchResult = null;
     },
 
     addToPokedex() {
-      if(this.searchedPokemon) {
+      if(this.pokemonSearchResult) {
         //aggiungo il pokemon all'array
         this.myPokedex.push({
-          id: this.searchedPokemon.id,
-          name: this.searchedPokemon.name
+          id: this.pokemonSearchResult.id,
+          name: this.pokemonSearchResult.name
         });
         //sovrascrivo l'array
         this.savePokedex();
+        this.isInPokedex();
       }
+    },
+
+    deleteToPokedex() {
+      this.myPokedex = this.myPokedex.filter((el) => el.id !== this.pokemonSearchResult.id);
+      this.savePokedex();
+      this.isInPokedex();
     },
 
     recoverPokedex() {
@@ -56,13 +65,18 @@ export default {
       localStorage.setItem('personalPokedex', JSON.stringify(this.myPokedex));
     },
 
-    alreadyInPokedex() {
-      //check if searched pokemon is already in my pokedex
-      if (this.myPokedex.some((el) => el.id === this.searchedPokemon.id)) {
+    isInPokedex() {
+      //check if it's in my pokedex
+      if (this.myPokedex.some((el) => el.id === this.pokemonSearchResult.id)) {
         this.inPokedex = true
       } else {
         this.inPokedex = false
       }
+    },
+
+    getDetails(pokeName) {
+      this.pokemonSearchResult = pokeName;
+      this.fetchPokemon(this.pokemonSearchResult);
     }
   },
 
@@ -79,14 +93,19 @@ export default {
       <div class="pokedex">
         <!-- details and search section -->
         <div class="pokedex__search-details">
-          <AppSearch @getPokemon="fetchPokemon" @catchPokemon="addToPokedex" :alreadyInMyPokedex="inPokedex"/>
-          <AppPokemonDetails :pokemon="searchedPokemon"/>
+          <AppSearch 
+            @getPokemon="fetchPokemon" @catchPokemon="addToPokedex"
+            @removePokemon="deleteToPokedex" 
+            :alreadyInMyPokedex="inPokedex"/>
+          <AppPokemonDetails :pokemon="pokemonSearchResult"/>
         </div>
         <!-- end of details and search section -->
 
         <!-- my pokemons section -->
         <div class="pokedex__pokemons">
-          <AppPokemonList :pokedex="myPokedex"/>
+          <AppPokemonList 
+          @getPokemonDetails="getDetails"
+          :pokedex="myPokedex"/>
         </div>
         <!-- end of my pokemons section -->
       </div>

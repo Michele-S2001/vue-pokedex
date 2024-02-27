@@ -2,6 +2,12 @@
   export default {
     props: {
       pokedex: Array
+    },
+
+    methods: {
+      getDetails(pokemonName) {
+        this.$emit('getPokemonDetails', pokemonName);
+      }
     }
   }
 </script>
@@ -10,11 +16,12 @@
 <template>
   <div class="my-pokemons">
     <h3>My pokemons</h3>
-    <ul class="pokemon" v-if="pokedex">
-      <li v-for="(poke, i) in pokedex" :key="i">
+    <ul class="pokemon" v-if="pokedex.length !== 0">
+      <li @click="getDetails(poke.name)" v-for="(poke, i) in pokedex" :key="i">
         {{ poke.name }}
       </li>
     </ul>
+    <span v-else>Nessun pokemon presente</span>
   </div>
 </template>
 
