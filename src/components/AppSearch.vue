@@ -12,6 +12,8 @@
       <button class="search-submit" @click="fetch">Search</button>
     </div>
     
+    <button v-if="!(alreadyInMyPokedex)" @click="catchIt" class="catch">Catch it !</button>
+    <button v-else class="remove">Rimuovi</button>
   </div>
 </template>
 
@@ -24,10 +26,18 @@
       }
     },
 
+    props: {
+      alreadyInMyPokedex: Boolean
+    },
+
     methods: {
       fetch() {
         this.$emit('getPokemon', this.searchedPokemon);
         this.searchedPokemon = null;
+      },
+
+      catchIt() {
+        this.$emit('catchPokemon');
       }
     }
   }
@@ -36,7 +46,9 @@
 <style lang="scss" scoped>
 @use '../styles/partials/vars' as *;
 .search-area {
-
+  display: flex;
+  justify-content: space-between;
+  padding: 0 14px;
   .search-group {
     display: flex;
     gap: 10px;
@@ -68,6 +80,19 @@
       &:active {
         transform: scale(0.8);
       }
+    }
+  }
+
+  .catch, .remove {
+    background-color: $pokeCelestial;
+    color: $white;
+    padding: 0 10px;
+    line-height: 34px;
+    border-radius: 20% 0 20% 0;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $pokeDarkCelestial;
     }
   }
 }
