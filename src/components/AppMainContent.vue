@@ -20,9 +20,9 @@ export default {
   },
 
   methods: {
-    fetchPokemon(pokemonSearchResult) {
-      if(pokemonSearchResult) {
-        const toLowerCaseName = pokemonSearchResult.toLowerCase()
+    fetchPokemon(pokemonSearched) {
+      if(pokemonSearched) {
+        const toLowerCaseName = pokemonSearched.toLowerCase()
         // Get the pokemon
         axios
           .get(`https://pokeapi.co/api/v2/pokemon/${toLowerCaseName}`)
@@ -31,19 +31,21 @@ export default {
             this.isInPokedex();
           })
       }
-      // delete v-model value once the searching process is done
+      /* if the value received was null then I reset
+       the variable of the pokemon found and the presence o
+       less in the pokedex */
       this.pokemonSearchResult = null;
       this.inPokedex = false;
     },
 
     addToPokedex() {
       if(this.pokemonSearchResult) {
-        //aggiungo il pokemon all'array
+        //add the pokemon to the array
         this.myPokedex.push({
           id: this.pokemonSearchResult.id,
           name: this.pokemonSearchResult.name
         });
-        //sovrascrivo l'array
+        //array overwrite
         this.savePokedex();
         this.isInPokedex();
       }
