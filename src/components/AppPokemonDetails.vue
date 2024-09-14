@@ -32,7 +32,7 @@
           <h4>Stats</h4>
           <div class="stats__inner">
             <div class="stat" v-for="(currStat, i) in pokemon.stats" :key="i">
-              <strong>{{ currStat.stat.name }}</strong><span>{{ currStat.base_stat }}</span>
+              <strong>{{ currStat.stat.name }}</strong><progress :value="currStat.base_stat" max="100"></progress>
             </div>
           </div>
         </div>
@@ -101,10 +101,28 @@
         &__inner {
           .stat {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-            span {
-              margin-left: auto;
+            progress {
+              height: 10px;
+              appearance: none;
+              flex-grow: 1;
+              max-width: 250px;
+
+              &::-webkit-progress-bar {
+                background-color: $white;
+                border-radius: 5px;
+              }
+              &::-webkit-progress-value {
+                border-radius: 5px;
+                background-color: $pokeLightBlue;
+              }
             }
+
+            /* strong {
+              flex-grow: 1;
+            } */
           }
         }
       }
